@@ -1,5 +1,4 @@
-import email
-import re
+from multiprocessing import context
 from django.shortcuts import render, redirect
 
 from accounts.forms import UserForm
@@ -12,6 +11,7 @@ from django.contrib.auth.tokens import default_token_generator
 
 
 from vendor.forms import VenderForm
+from vendor.models import Vendor
 
 from django.core.exceptions import PermissionDenied
 
@@ -187,6 +187,7 @@ def custDashboard(request):
 @login_required(login_url='login')
 @user_passes_test(check_role_vendor)
 def vendorDashboard(request):
+    
     return render(request, 'accounts/vendorDashboard.html')
 
 
