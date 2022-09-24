@@ -1,4 +1,3 @@
-from multiprocessing import context
 from django.shortcuts import render, redirect
 
 from accounts.forms import UserForm
@@ -10,7 +9,7 @@ from django.utils.http import urlsafe_base64_decode
 from django.contrib.auth.tokens import default_token_generator
 
 
-from vendor.forms import VenderForm
+from vendor.forms import VendorForm
 from vendor.models import Vendor
 
 from django.core.exceptions import PermissionDenied
@@ -89,7 +88,7 @@ def registerVendor(request):
     elif request.method == 'POST':
         # store the data and  create user
         form = UserForm(request.POST)
-        v_form = VenderForm(request.POST, request.FILES)
+        v_form = VendorForm(request.POST, request.FILES)
         if form.is_valid() and v_form.is_valid():
             first_name = form.cleaned_data['first_name']
             last_name = form.cleaned_data['last_name']
@@ -119,7 +118,7 @@ def registerVendor(request):
             print(form.errors)
     else:
         form = UserForm()
-        v_form = VenderForm()
+        v_form = VendorForm()
     context = {
         'form': form,
         'v_form': v_form,
